@@ -26,7 +26,25 @@ public class Main {
 //        read(mongoCollection);
 //        readByParam(mongoCollection, "Mark", "BMW");
 //        delete(mongoCollection, "Mark", "BMW");
-        update(mongoCollection);
+//        update(mongoCollection);
+
+        MongoCollection mongoCollectionBike = mongoDatabase.getCollection("bike");
+        saveBike(mongoCollectionBike);
+
+    }
+
+    private static void saveBike(MongoCollection mongoCollectionBike) {
+        Document document = new Document();
+        document.put("name", "Rower Błażeja");
+
+        Person owner = new Person("Krzysiek","Kowalski");
+
+        Document documentPerson = new Document();
+        documentPerson.put("Name", owner.getName());
+        documentPerson.put("Surname", owner.getSurname());
+        document.put("owner", documentPerson);
+
+        mongoCollectionBike.insertOne(document);
     }
 
     private static void update(MongoCollection mongoCollection) {
